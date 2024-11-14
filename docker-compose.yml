@@ -1,0 +1,39 @@
+version: '3.8'  
+
+
+services:
+
+  user-service:
+    build:
+      context: ./user-service  
+      dockerfile: Dockerfile  
+    ports:
+      - "3000:3000"  
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+    networks:
+      - app-network
+
+  notification-service:
+    build:
+      context: ./notification-service  
+      dockerfile: Dockerfile  
+    ports:
+      - "3001:3001"  
+    networks:
+      - app-network
+  
+  news-service:
+    build:
+      context: ./news-service  
+      dockerfile: Dockerfile  
+    ports:
+      - "3002:3002"  
+    networks:
+      - app-network
+  
+  
+
+networks:
+  app-network:
+    driver: bridge
