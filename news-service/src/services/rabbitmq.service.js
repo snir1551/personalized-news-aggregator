@@ -1,4 +1,3 @@
-import amqp from 'amqplib';
 import { connectToRabbitMQ } from '../config/rabbitmq.js'
 export const preferencesCache = new Map();
 
