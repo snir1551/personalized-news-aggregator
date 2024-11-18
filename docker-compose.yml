@@ -11,8 +11,8 @@ services:
       - "3000:3000"  
     environment:
       - MONGODB_URI=${MONGODB_URI}
-    depends_on:
-      - rabbitmq
+    # depends_on:
+    #   - rabbitmq
     networks:
       - app-network
 
@@ -33,21 +33,41 @@ services:
       - "3002:3002"
     environment:
       - RABBITMQ_URL=amqp://rabbitmq:5672 
-    depends_on:
-      - rabbitmq
+    # depends_on:
+    #   - rabbitmq
     networks:
       - app-network
 
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq
-    ports:
-      - "5672:5672"   
-      - "15672:15672"  
+  # rabbitmq:
+  #   image: rabbitmq:3-management
+  #   container_name: rabbitmq
+  #   ports:
+  #     - "5672:5672"   
+  #     - "15672:15672"  
+  #   networks:
+  #     - app-network
+  
+  dapr:
+    image: "daprio/daprd:latest"
+    container_name: dapr
+    command: ["./daprd", "-app-id", "user-service", "-app-port", "3000", "-dapr-http-port", "3500", "-dapr-grpc-port", "50002", "-components-path", "/components"]
+    volumes: 
+      - "./components:/components"
+    depends_on:
+      - user-service
+      - redis
     networks:
       - app-network
-  
-  
+    ports:
+      - "3500:3500"
+      - "50002:50002"
+
+  redis:
+    image: redis
+    ports: 
+      - "6379:6379"
+    networks:
+      - app-network
 
 networks:
   app-network:

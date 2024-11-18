@@ -8,9 +8,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3002;
 
-connectRabbitMQ()
-  .then(() => console.log("News Service connected to RabbitMQ"))
-  .catch((err) => console.error("Failed to connect to RabbitMQ:", err));
+// connectRabbitMQ()
+//   .then(() => console.log("News Service connected to RabbitMQ"))
+//   .catch((err) => console.error("Failed to connect to RabbitMQ:", err));
 
 
 app.use(express.json());
