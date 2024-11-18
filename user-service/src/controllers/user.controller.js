@@ -1,5 +1,5 @@
-import { User } from '../models/user.model.js';
-
+import { User } from '../services/user.service.js';
+import { sendToQueue } from '../services/rabbitmq.service.js'
 
 const allUsers = async (req, res) => {
   try {
@@ -40,6 +40,11 @@ const updatePreferences = async (req, res) => {
       const { userId } = req.params;
       const updatedPreferences = req.body.preferences;
       const user = await User.findByIdAndUpdate(userId, { preferences: updatedPreferences }, { new: true });
+      const event = {
+        userId,  
+        preferences: updatedPreferences,
+      };
+      await sendToQueue(event);
       res.json({ message: 'Preferences updated successfully', user });
     } catch (error) {
       res.status(500).json({ error: error.message });
