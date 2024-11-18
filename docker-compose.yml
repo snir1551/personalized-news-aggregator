@@ -11,6 +11,8 @@ services:
       - "3000:3000"  
     environment:
       - MONGODB_URI=${MONGODB_URI}
+    depends_on:
+      - rabbitmq
     networks:
       - app-network
 
@@ -28,7 +30,20 @@ services:
       context: ./news-service  
       dockerfile: Dockerfile  
     ports:
-      - "3002:3002"  
+      - "3002:3002"
+    environment:
+      - RABBITMQ_URL=amqp://rabbitmq:5672 
+    depends_on:
+      - rabbitmq
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"   
+      - "15672:15672"  
     networks:
       - app-network
   

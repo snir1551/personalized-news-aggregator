@@ -1,6 +1,7 @@
 import express from 'express';
 import newsRoutes from './routes/news.route.js';
 import dotenv from 'dotenv';
+import { connectRabbitMQ } from './services/rabbitmq.service.js'
 
 dotenv.config();
 
