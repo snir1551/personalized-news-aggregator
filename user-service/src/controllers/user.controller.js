@@ -49,7 +49,7 @@ const updatePreferences = async (req, res) => {
         preferences: updatedPreferences,
       };
       // await sendToQueue(event);
-      const state = [{key: `preferences-${userId}`, value: updatePreferences}];
+      const state = [{key: `preferences-${userId}`, value: updatedPreferences}];
       await axios.post(STATE_URL, state);
       res.json({ message: 'Preferences updated successfully', user });
     } catch (error) {

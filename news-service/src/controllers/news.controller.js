@@ -9,7 +9,8 @@ export const fetchNewsController = async (req, res) => {
     const { userId } = req.body;
     //const preferences = preferencesCache.get(userId);
     const URL = `${STATE_URL}/prefences-${userId}`;
-    const preferences = await axios.get(URL);
+    const preferencesResponse = await axios.get(URL);
+    const preferences = preferencesResponse.data;
     
 
     try {
