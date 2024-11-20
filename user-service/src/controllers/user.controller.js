@@ -49,6 +49,7 @@ const updatePreferences = async (req, res) => {
         preferences: updatedPreferences,
       };
       // await sendToQueue(event);
+      console.log("user-service, userId: ", userId)
       const state = [{key: `preferences-${userId}`, value: updatedPreferences}];
       await axios.post(STATE_URL, state);
       res.json({ message: 'Preferences updated successfully', user });
