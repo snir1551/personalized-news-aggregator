@@ -1,10 +1,6 @@
 import { User } from '../services/user.service.js';
-import { sendToQueue } from '../services/rabbitmq.service.js'
+import { saveToStateStore, deleteFromStateStore } from '../services/dapr.service.js';
 
-import axios from "axios"
-const DAPR_PORT = 3500
-const STATE_STORE_NAME = "statestore"
-const STATE_URL = `http://dapr:${DAPR_PORT}/v1.0/state/${STATE_STORE_NAME}`
 const allUsers = async (req, res) => {
   try {
     const user = await User.find();
@@ -18,24 +14,28 @@ const register = async (req, res) => {
     try {
       const user = new User(req.body);
       await user.save();
+      await saveToStateStore(`preferences-${user._id}`, req.body.preferences);
+      await saveToStateStore(`email-${user._id}`, req.body.email);
       res.status(201).json({ message: 'User registered successfully', user });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
 };
+
   
 
+
 const login = async (req, res) => {
-    try {
-      const { username, password } = req.body;
-      const user = await User.findOne({ username });
-      if (!user || !(await user.isValidPassword(password))) {
-        return res.status(401).json({ message: 'Invalid credentials' });
-      }
-      res.json({ message: 'Login successful'});
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    if (!user || !(await user.isValidPassword(password))) {
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
+    res.json({ message: 'Login successful'});
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
   
 
@@ -44,14 +44,8 @@ const updatePreferences = async (req, res) => {
       const { userId } = req.params;
       const updatedPreferences = req.body.preferences;
       const user = await User.findByIdAndUpdate(userId, { preferences: updatedPreferences }, { new: true });
-      const event = {
-        userId,  
-        preferences: updatedPreferences,
-      };
-      // await sendToQueue(event);
       console.log("user-service, userId: ", userId)
-      const state = [{key: `preferences-${userId}`, value: updatedPreferences}];
-      await axios.post(STATE_URL, state);
+      await saveToStateStore(`preferences-${userId}`, updatedPreferences);
       res.json({ message: 'Preferences updated successfully', user });
     } catch (error) {
       console.error("error api/users/userId/preferences", error.message, error.stack);
@@ -59,10 +53,32 @@ const updatePreferences = async (req, res) => {
     }
 };
 
+const deleteUser = async (req, res) => {
+  try {
+      const { userId } = req.params;
+
+
+      await deleteFromStateStore(`preferences-${userId}`);
+      await deleteFromStateStore(`email-${userId}`);
+
+
+      const user = await User.findOneAndDelete({ _id: userId });
+      
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      res.status(200).json({ message: 'User and related data deleted successfully' });
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+};
+
 
 export const userController = {
   allUsers,
   register,
   login,
-  updatePreferences
+  updatePreferences,
+  deleteUser
 }

@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
 import transporterConfig from '../config/email.js';
-
+import dotenv from "dotenv";
+dotenv.config();
 let transporter;
 
 const initTransporter = () => {

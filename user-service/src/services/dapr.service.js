@@ -26,3 +26,14 @@ export const getFromStateStore = async (key) => {
     throw new Error('Error retrieving from Dapr state store');
   }
 };
+
+export const deleteFromStateStore = async (key) => {
+    try {
+      const response = await axios.delete(`${STATE_URL}/${key}`);
+      console.log(`Successfully deleted ${key} from Dapr state store`);
+      return response.data;
+    } catch (error) {
+      console.error('Error deleting from Dapr state store:', error.message);
+      throw new Error('Error deleting from Dapr state store');
+    }
+};
