@@ -10,16 +10,20 @@ export const sendNotifications = async (userPreferences) => {
    
     console.log("userPreferencesNotification: ", userPreferences)
     const { userId } = userPreferences;
-   
+    const technology = [];
     const newsResponse = await getFromStateStore(`news-${userId}`);
-    const emailResponse = await getFromStateStore(`email-${userId}`);
+    const userDataResponse = await getFromStateStore(`userdata-${userId}`);
+    //console.log("userDataResponse: ", userDataResponse);
+    // const preferencesResponse = await getFromStateStore(`preferences-${userId}`);
+    //technology = preferencesResponse.technology;
+    
     // console.log("preferencesResponse.data notification: ", preferencesResponse);
-    const extractedNews = extractNews(newsResponse)
+    const extractedNews = extractNews(newsResponse);
     const emailContent = formatEmailContent(extractedNews);
-
+    
     await Promise.all([
-        sendEmailHandler(emailResponse, emailContent),
-        //sendTelegramHandler(userPreferences.chat_id, preferencesResponse.data)
+        sendEmailHandler(userDataResponse.email, emailContent),
+        sendTelegramHandler(userDataResponse.telegram, "you got news to email")
     ]);
 };
 
