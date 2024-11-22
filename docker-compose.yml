@@ -11,6 +11,7 @@ services:
       - "3000:3000"  
     environment:
       - MONGODB_URI=${MONGODB_URI}
+      - NODE_ENV=dev
     # depends_on:
     #   - rabbitmq
     networks:

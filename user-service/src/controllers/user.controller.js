@@ -1,6 +1,9 @@
+import dotenv from "dotenv";
+dotenv.config();
 import { User } from '../services/user.service.js';
 import { saveToStateStore, deleteFromStateStore } from '../services/dapr.service.js';
 import { logger } from '../utils/logger.js'
+
 
 const allUsers = async (req, res) => {
   try {
@@ -18,17 +21,28 @@ const register = async (req, res) => {
     try {
       logger.info('Registering new user');
       const user = new User(req.body);
+      logger.info("created user")
       await user.save();
+      logger.info("user saved")
       logger.info({ userId: user._id }, 'User registered successfully');
-      await saveToStateStore(`preferences-${user._id}`, req.body.preferences);
       const userData = {
         email: req.body.email,
         telegram: req.body.chatid
       };
-      await saveToStateStore(`userdata-${user._id}`, userData);
+      console.log("env: ", JSON.stringify(process.env))
+      if(process.env.NODE_ENV === "dev")
+      {
+        console.log("saving to dapr")
+        await saveToStateStore(`preferences-${user._id}`, req.body.preferences);
+        await saveToStateStore(`userdata-${user._id}`, userData);
+        
+      }else{
+        console.log("not saving to dapr")
+      }
+   
       res.status(201).json({ message: 'User registered successfully', user });
     } catch (error) {
-      logger.error({ err: error }, 'Error during user registration');
+      console.error({ err: error }, 'Error during user registration');
       res.status(400).json({ error: error.message });
     }
 };
