@@ -4,23 +4,27 @@ import { saveToStateStore, getFromStateStore } from '../services/dapr.service.js
 
 
 export const fetchNewsController = async (req, res) => {
-    const { userId } = req.body;
-
-    const preferencesResponse = await getFromStateStore(`preferences-${userId}`);
-
+    const { userId, preferences } = req.body;
+    let preferencesResponse = preferences
+    if (process.env.NODE_ENV === 'dev') {
+        console.log("saved to dapr")
+        preferencesResponse = await getFromStateStore(`preferences-${userId}`);
+    } else {
+        console.log("not saved to dapr")
+    }
     console.log(`preferencesResponse.data: ${preferencesResponse}`);
    
 
-    const preferences = preferencesResponse;
-    console.log(`preferences: ${preferences}`);
     
 
     try {
-        if (!preferences) {
+        if (!preferencesResponse) {
             return res.status(400).json({ error: 'User has no preferences set' });
         }
-        const newsResponse = await fetchNewsHandler(preferences.newsCategories);
-        await saveToStateStore(`news-${userId}`, newsResponse.data);
+        const newsResponse = await fetchNewsHandler(preferencesResponse.newsCategories);
+        if (process.env.NODE_ENV === 'dev') {
+            await saveToStateStore(`news-${userId}`, newsResponse.data);
+        }
 
         res.json(newsResponse.data);
     } catch (error) {

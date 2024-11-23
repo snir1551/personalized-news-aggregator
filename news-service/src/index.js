@@ -1,16 +1,12 @@
 import express from 'express';
 import newsRoutes from './routes/news.route.js';
 import dotenv from 'dotenv';
-import { connectRabbitMQ } from './services/rabbitmq.service.js'
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3002;
 
-// connectRabbitMQ()
-//   .then(() => console.log("News Service connected to RabbitMQ"))
-//   .catch((err) => console.error("Failed to connect to RabbitMQ:", err));
+
 
 
 app.use(express.json());
@@ -18,7 +14,5 @@ app.use(express.json());
 
 app.use('/news', newsRoutes); 
 
+export default app;
 
-app.listen(PORT, () => {
-    console.log(`News Service is running on port ${PORT}`);
-});
