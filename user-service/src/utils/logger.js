@@ -1,5 +1,4 @@
 import { createLogger, format, transports } from 'winston';
-import fs from 'fs';
 import path from 'path';
 
 
