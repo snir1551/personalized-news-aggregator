@@ -1,14 +1,13 @@
-import dotenv from "dotenv";
-dotenv.config();
-import { User } from '../services/user.service.js';
-import { saveToStateStore, deleteFromStateStore } from '../services/dapr.service.js';
-import { logger } from '../utils/logger.js'
+// import dotenv from "dotenv";
+// dotenv.config();
+import { userService } from '../services/user.service.js';
+import { logger } from '../utils/logger.js';
 
 
 const allUsers = async (req, res) => {
   try {
     logger.info('Fetching all users');
-    const user = await User.find();
+    const user = await userService.getAllUsers();
     logger.info(`Found ${user.length} users`);
     res.json(user);
   } catch (error) {
@@ -17,34 +16,35 @@ const allUsers = async (req, res) => {
   }
 };
 
-const register = async (req, res) => {
-    try {
-      logger.info('Registering new user');
-      const user = new User(req.body);
-      logger.info("created user")
-      await user.save();
-      logger.info("user saved")
-      logger.info({ userId: user._id }, 'User registered successfully');
-      const userData = {
-        email: req.body.email,
-        telegram: req.body.chatid
-      };
-      console.log("env: ", JSON.stringify(process.env))
-      if(process.env.NODE_ENV === "dev")
-      {
-        console.log("saving to dapr")
-        await saveToStateStore(`preferences-${user._id}`, req.body.preferences);
-        await saveToStateStore(`userdata-${user._id}`, userData);
-        
-      }else{
-        console.log("not saving to dapr")
-      }
-   
-      res.status(201).json({ message: 'User registered successfully', user });
-    } catch (error) {
-      console.error({ err: error }, 'Error during user registration');
-      res.status(400).json({ error: error.message });
+const getUser = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    logger.info(`Fetching user with ID: ${userId}`);
+    const user = await userService.getUserById(userId);
+
+    if (!user) {
+      logger.warn(`User with ID: ${userId} not found`);
+      return res.status(404).json({ message: 'User not found' });
     }
+
+    logger.info(`User found: ${user.username}`);
+    res.json(user); 
+  } catch (error) {
+    logger.error({ err: error }, `Error retrieving user with ID: ${id}`);
+    res.status(500).send('Error retrieving user from the database');
+  }
+};
+
+const register = async (req, res) => {
+  try {
+    logger.info('Registering new user');
+    const user = await userService.createUser(req.body);
+    logger.info({ userId: user._id }, 'User registered successfully');
+    res.status(201).json({ message: 'User registered successfully', user });
+  } catch (error) {
+    logger.error({ err: error }, 'Error during user registration');
+    res.status(400).json({ error: error.message });
+  }
 };
 
   
@@ -54,15 +54,15 @@ const login = async (req, res) => {
   try {
     const { username, password } = req.body;
     logger.info(`Attempting login for username: ${username}`);
+    const isValid = await userService.validateLogin(username, password);
 
-    const user = await User.findOne({ username });
-    if (!user || !(await user.isValidPassword(password))) {
+    if (!isValid) {
       logger.warn({ username }, 'Invalid login attempt');
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
     logger.info({ username }, 'Login successful');
-    res.json({ message: 'Login successful'});
+    res.json({ message: 'Login successful' });
   } catch (error) {
     logger.error({ err: error }, 'Error during login');
     res.status(500).json({ error: error.message });
@@ -76,15 +76,17 @@ const updatePreferences = async (req, res) => {
       const updatedPreferences = req.body.preferences;
 
       logger.info({ userId, updatedPreferences }, 'Updating preferences');
-      const user = await User.findByIdAndUpdate(userId, { preferences: updatedPreferences }, { new: true });
+      const user = await userService.updateUserPreferences(userId, updatedPreferences);
 
-      console.log("user-service, userId: ", userId)
-      await saveToStateStore(`preferences-${userId}`, updatedPreferences);
+      if (!user) {
+        logger.warn({ userId }, 'User not found for preferences update');
+        return res.status(404).json({ message: 'User not found' });
+      }
+
       logger.info({ userId }, 'Preferences updated successfully');
       
       res.json({ message: 'Preferences updated successfully', user });
     } catch (error) {
-      console.error("error api/users/userId/preferences", error.message, error.stack);
       logger.error({ userId: req.params.userId, err: error }, 'Error updating preferences');
       res.status(500).json({ error: error.message });
     }
@@ -94,12 +96,7 @@ const deleteUser = async (req, res) => {
   try {
       const { userId } = req.params;
       logger.info({ userId }, 'Attempting to delete user and related data');
-
-      await deleteFromStateStore(`preferences-${userId}`);
-      await deleteFromStateStore(`email-${userId}`);
-
-
-      const user = await User.findOneAndDelete({ _id: userId });
+      const user = await userService.deleteUser(userId);
       
       if (!user) {
         logger.warn({ userId }, 'User not found for deletion');
@@ -117,6 +114,7 @@ const deleteUser = async (req, res) => {
 
 export const userController = {
   allUsers,
+  getUser,
   register,
   login,
   updatePreferences,
