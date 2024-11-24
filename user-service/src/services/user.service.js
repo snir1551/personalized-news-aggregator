@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import { User } from '../models/user.model.js';
 import { saveToStateStore, deleteFromStateStore } from './dapr.service.js';
+import { logger } from '../utils/logger.js';
 
 const getAllUsers = async () => {
     return await User.find();
