@@ -2,36 +2,39 @@ import { sendEmailHandler } from '../services/email.service.js';
 import { sendTelegramHandler } from '../services/telegram.service.js';
 import { getFromStateStore } from '../services/dapr.service.js';
 import { extractNews, formatEmailContent } from '../utils/extract.util.js';
-
+import { logger } from '../utils/logger.js';
 
 
 
 export const sendNotifications = async (userPreferences) => {
-    console.log("Start sendNotifications with userPreferences:", userPreferences);
+    logger.info('Start sendNotifications with userPreferences', userPreferences);
     const { userId } = userPreferences;
-    if (!userId) throw new Error("Missing userId");
+    if (!userId){
+        logger.error('Missing userId in userPreferences');
+        throw new Error("Missing userId");
+    } 
 
     try {
         const newsResponse = await getFromStateStore(`news-${userId}`);
-        console.log("Fetched news:", newsResponse);
+        logger.info(`Fetched news for userId: ${userId}`);
 
         const userDataResponse = await getFromStateStore(`userdata-${userId}`);
-        console.log("Fetched user data:", userDataResponse);
+        logger.info(`Fetched user data for userId: ${userId}`);
 
         const extractedNews = extractNews(newsResponse);
-        console.log("Extracted news:", extractedNews);
+        logger.info(`Extracted ${extractedNews.length} news articles`);
 
         const emailContent = formatEmailContent(extractedNews);
-        console.log("Email content:", emailContent);
+        logger.info('Formatted email content for user');
 
         await Promise.all([
             sendEmailHandler(userDataResponse.email, emailContent),
             sendTelegramHandler(userDataResponse.telegram, "you got news to email"),
         ]);
 
-        console.log("Notifications sent successfully.");
+        logger.info(`Notifications sent successfully to userId: ${userId}`);
     } catch (error) {
-        console.error("Error in sendNotifications:", error.message);
+        logger.error({ err: error }, 'Error in sendNotifications');
         throw error;
     }
 };
