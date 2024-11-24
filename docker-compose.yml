@@ -12,8 +12,9 @@ services:
     environment:
       - MONGODB_URI=${MONGODB_URI}
       - NODE_ENV=dev
-    # depends_on:
-    #   - rabbitmq
+    volumes:
+      - ./shared-files/dapr/dapr.service.js:/usr/src/app/src/services/dapr.service.js
+      - ./shared-files/logs/logger.js:/usr/src/app/src/utils/logger.js
     networks:
       - app-network
 
@@ -23,6 +24,9 @@ services:
       dockerfile: Dockerfile  
     ports:
       - "3001:3001"
+    volumes:
+      - ./shared-files/dapr/dapr.service.js:/usr/src/app/src/services/dapr.service.js
+      - ./shared-files/logs/logger.js:/usr/src/app/src/utils/logger.js
     networks:
       - app-network
   
@@ -34,8 +38,9 @@ services:
       - "3002:3002"
     environment:
       - RABBITMQ_URL=amqp://rabbitmq:5672 
-    # depends_on:
-    #   - rabbitmq
+    volumes:
+      - ./shared-files/dapr/dapr.service.js:/usr/src/app/src/services/dapr.service.js
+      - ./shared-files/logs/logger.js:/usr/src/app/src/utils/logger.js
     networks:
       - app-network
 

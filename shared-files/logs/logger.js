@@ -1,9 +1,5 @@
 import { createLogger, format, transports } from 'winston';
-import path from 'path';
 
-
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-const logDir = path.join(__dirname, 'logs');
 
 
 export const logger = createLogger({
