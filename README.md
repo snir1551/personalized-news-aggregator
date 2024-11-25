@@ -34,7 +34,7 @@ This project consists of three microservices: User Service, News Service and Not
 ---
 ## Technologies Used
 - **Programming Language**: JavaScript (Node.js) 
-- **Frameworks/Libraries**: Express.js, axios, bcryptjs, cors, dotenv, mongoose, supertest, vitest, winston, nodemailer, amqplib  
+- **Frameworks/Libraries**: Express.js, React, axios, bcryptjs, cors, dotenv, mongoose, supertest, vitest, winston, nodemailer, amqplib  
 - **Database**: MongoDB
 - **Tools**: Docker, Git, Postman, Dapr
 
