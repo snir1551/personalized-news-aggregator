@@ -3,9 +3,9 @@
 This project consists of three microservices: User Service, News Service and Notification Service. Each service is responsible for specific functionality.
 
 
-![personalized-news-aggregator2 drawio](https://github.com/user-attachments/assets/5836261a-1b6f-463b-887a-dad353c29cab)
 
-![personalized-news-aggregator-news-service drawio (1)](https://github.com/user-attachments/assets/b96cff25-6db4-4345-8430-dc423de4b416)
+
+
 
 ![personalized-news-aggregator-notification-service drawio](https://github.com/user-attachments/assets/2adb2e9d-2acb-483c-80a9-0e5af2e306ab)
 
@@ -14,24 +14,33 @@ This project consists of three microservices: User Service, News Service and Not
 ## Table of Contents
 - [System Diagram](#system-diagram)
   - [General Structure](#general-structure)
-  - [User-Service Structure]()
-  - [Notification-Service Structure]()
-  - [News-Service Structure]()
-- [Technologies Used]()
-- [Getting Started]()  
-  - [Prerequisites]()  
-  - [Installation]()
-- [How to Run the Project]()  
-- [How to Run the Testing]()
+  - [User-Service Structure](#user-service-structure)
+  - [Notification-Service Structure](#notification-service-structure)
+  - [News-Service Structure](#news-service-structure)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)  
+  - [Prerequisites](#prerequisites)  
+  - [Installation](#installation)
+- [How to Run the Project](#how-to-run-the-project)  
+- [How to Run the Testing](#how-to-run-the-testing)
 
 ---
 
-# System Diagram
-## General Structure
+## System Diagram
+
+### General Structure
 ![personalized-news-aggregator drawio (1)](https://github.com/user-attachments/assets/c4f9c13d-3ff2-48f3-86d8-7f9b609b616b)
 
-## Technologies Used
+### User-Service Structure
+![personalized-news-aggregator2 drawio](https://github.com/user-attachments/assets/5836261a-1b6f-463b-887a-dad353c29cab)
 
+### Notification-Service Structure
+![personalized-news-aggregator-news-service drawio (1)](https://github.com/user-attachments/assets/b96cff25-6db4-4345-8430-dc423de4b416)
+
+### News-Service Structure
+![personalized-news-aggregator-notification-service drawio](https://github.com/user-attachments/assets/2adb2e9d-2acb-483c-80a9-0e5af2e306ab)
+
+## Technologies Used
 - **Programming Language**: JavaScript (Node.js) 
 - **Frameworks/Libraries**: Express.js, axios, bcryptjs, cors, dotenv, mongoose, supertest, vitest, winston, nodemailer, amqplib  
 - **Database**: MongoDB
