@@ -1,0 +1,36 @@
+/* עיצוב בסיסי לדף User */
+.user-container {
+    text-align: center;
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+  }
+  
+.user-container h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #333;
+}
+  
+.buttons-container {
+    margin-top: 20px;
+}
+  
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s;
+}
+  
+button:hover {
+    background-color: #0056b3;
+}
+  
+button:focus {
+    outline: none;
+}

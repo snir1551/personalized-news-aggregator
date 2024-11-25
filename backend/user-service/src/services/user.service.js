@@ -45,15 +45,15 @@ const createUser = async (userBody) => {
     }
 };
 
-const validateLogin = async (username, password) => {
+const validateLogin = async (email, password) => {
     try {
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ email });
         if (!user || !(await user.isValidPassword(password))) {
             return false;
         }
         return true;
     } catch (error) {
-        logger.error(`Error validating login for username ${username}: ${error.message}`);
+        logger.error(`Error validating login for email ${email}: ${error.message}`);
         throw new Error("Login validation failed");
     }
 };
@@ -93,6 +93,27 @@ const deleteUser = async (userId) => {
     }
 };
 
+
+const getUserByEmail = async (email) => {
+    try {
+      
+      const user = await User.findOne({ email });
+  
+      if (!user) {
+        throw new Error("User not found");
+      }
+  
+      return {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+      };
+    } catch (error) {
+      logger.error(`Error fetching user by email ${email}: ${error.message}`);
+      throw new Error("Failed to fetch user");
+    }
+};
+
 export const userService = {
     getAllUsers,
     getUserById,
@@ -100,4 +121,5 @@ export const userService = {
     validateLogin,
     updateUserPreferences,
     deleteUser,
+    getUserByEmail,
 };

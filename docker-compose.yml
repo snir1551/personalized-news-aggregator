@@ -1,26 +1,22 @@
-version: '3.8'  
-
+version: '3.8'
 
 services:
-
   user-service:
     build:
-      context: ./user-service  
-      dockerfile: Dockerfile  
+      context: ./backend/user-service
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"  
+      - "3000:3000"
     environment:
       - MONGODB_URI=${MONGODB_URI}
       - NODE_ENV=dev
-    # depends_on:
-    #   - rabbitmq
     networks:
       - app-network
 
   notification-service:
     build:
-      context: ./notification-service  
-      dockerfile: Dockerfile  
+      context: ./backend/notification-service
+      dockerfile: Dockerfile
     ports:
       - "3001:3001"
     networks:
@@ -28,32 +24,20 @@ services:
   
   news-service:
     build:
-      context: ./news-service  
-      dockerfile: Dockerfile  
+      context: ./backend/news-service
+      dockerfile: Dockerfile
     ports:
       - "3002:3002"
-    environment:
-      - RABBITMQ_URL=amqp://rabbitmq:5672 
-    # depends_on:
-    #   - rabbitmq
     networks:
       - app-network
 
-  # rabbitmq:
-  #   image: rabbitmq:3-management
-  #   container_name: rabbitmq
-  #   ports:
-  #     - "5672:5672"   
-  #     - "15672:15672"  
-  #   networks:
-  #     - app-network
   
   dapr:
     image: "daprio/daprd:latest"
     container_name: dapr
     command: ["./daprd", "-app-id", "user-service", "-app-port", "3000", "-dapr-http-port", "3500", "-dapr-grpc-port", "50002", "-components-path", "/components"]
-    volumes: 
-      - "./components:/components"
+    volumes:
+      - "./backend/components:/components"
     depends_on:
       - user-service
       - redis
@@ -65,8 +49,19 @@ services:
 
   redis:
     image: redis
-    ports: 
+    ports:
       - "6379:6379"
+    networks:
+      - app-network
+
+  react-app:
+    build:
+      context: ./frontend/react-app
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend/react-app/src:/app/src
     networks:
       - app-network
 

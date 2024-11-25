@@ -52,17 +52,17 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    logger.info(`Attempting login for username: ${username}`);
-    const isValid = await userService.validateLogin(username, password);
+    const { email, password } = req.body;
+    logger.info(`Attempting login for email: ${email}`);
+    const isValid = await userService.validateLogin(email, password);
 
     if (!isValid) {
-      logger.warn({ username }, 'Invalid login attempt');
+      logger.warn({ email }, 'Invalid login attempt');
       return res.status(401).json({ message: 'Invalid credentials' });
     }
-
-    logger.info({ username }, 'Login successful');
-    res.json({ message: 'Login successful' });
+    const user = await userService.getUserByEmail(email);
+    logger.info({ user }, 'Login successful');
+    res.json({ success: true, message: 'Login successful', user: { id: user.id, username: user.username, email: user.email } });
   } catch (error) {
     logger.error({ err: error }, 'Error during login');
     res.status(500).json({ error: error.message });
@@ -104,7 +104,7 @@ const deleteUser = async (req, res) => {
       }
 
       logger.info({ userId }, 'User and related data deleted successfully');
-      res.status(200).json({ message: 'User and related data deleted successfully' });
+      res.status(200).json({ success: true, message: 'User and related data deleted successfully' });
   } catch (error) {
       logger.error({ userId: req.params.userId, err: error }, 'Error during user deletion');
       res.status(500).json({ error: error.message });
