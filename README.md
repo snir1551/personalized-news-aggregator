@@ -1,28 +1,41 @@
 # personalized-news-aggregator
 
 This project consists of three microservices: User Service, News Service and Notification Service. Each service is responsible for specific functionality.
-![personalized-news-aggregator drawio (1)](https://github.com/user-attachments/assets/c4f9c13d-3ff2-48f3-86d8-7f9b609b616b)
+
 
 ![personalized-news-aggregator2 drawio](https://github.com/user-attachments/assets/5836261a-1b6f-463b-887a-dad353c29cab)
 
+![personalized-news-aggregator-news-service drawio (1)](https://github.com/user-attachments/assets/b96cff25-6db4-4345-8430-dc423de4b416)
+
+![personalized-news-aggregator-notification-service drawio](https://github.com/user-attachments/assets/2adb2e9d-2acb-483c-80a9-0e5af2e306ab)
+
+
 
 ## Table of Contents
-
-- [Technologies Used]()  
+- [System Diagram](#system-diagram)
+  - [General Structure](#general-structure)
+  - [User-Service Structure]()
+  - [Notification-Service Structure]()
+  - [News-Service Structure]()
+- [Technologies Used]()
 - [Getting Started]()  
   - [Prerequisites]()  
-  - [Installation]()  
+  - [Installation]()
 - [How to Run the Project]()  
 - [How to Run the Testing]()
 
 ---
 
+# System Diagram
+## General Structure
+![personalized-news-aggregator drawio (1)](https://github.com/user-attachments/assets/c4f9c13d-3ff2-48f3-86d8-7f9b609b616b)
+
 ## Technologies Used
 
 - **Programming Language**: JavaScript (Node.js) 
-- **Frameworks/Libraries**: Express.js  
+- **Frameworks/Libraries**: Express.js, axios, bcryptjs, cors, dotenv, mongoose, supertest, vitest, winston, nodemailer, amqplib  
 - **Database**: MongoDB
-- **Tools**: Docker, Git, Postman
+- **Tools**: Docker, Git, Postman, Dapr
 
 
 ---
