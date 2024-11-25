@@ -1,6 +1,10 @@
 # personalized-news-aggregator
 
 This project consists of three microservices: User Service, News Service and Notification Service. Each service is responsible for specific functionality.
+![personalized-news-aggregator drawio (1)](https://github.com/user-attachments/assets/c4f9c13d-3ff2-48f3-86d8-7f9b609b616b)
+
+![personalized-news-aggregator2 drawio](https://github.com/user-attachments/assets/5836261a-1b6f-463b-887a-dad353c29cab)
+
 
 ## Table of Contents
 
