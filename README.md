@@ -3,22 +3,41 @@
 This project consists of three microservices: User Service, News Service and Notification Service. Each service is responsible for specific functionality.
 
 ## Table of Contents
+- [System Diagram]()
+  - [General Structure](#general-structure)
+  - [User Service Structure](#user-service-structure)
+  - [News Service Structure](#news-service-structure)
+  - [Notification Service Structure](#notification-service-structure)
+- [Technologies Used](#technologies-used)  
+- [Getting Started](#getting-started)  
+  - [Prerequisites](#prerequisites)  
+  - [Installation](#installation)  
+- [How to Run the Project](#how-to-run-the-project)  
+- [How to Run the Testing](#how-to-run-the-testing)
 
-- [Technologies Used]()  
-- [Getting Started]()  
-  - [Prerequisites]()  
-  - [Installation]()  
-- [How to Run the Project]()  
-- [How to Run the Testing]()
+---
 
+## System Diagram
+
+### General Structure
+![personalized-news-aggregator-general](https://github.com/user-attachments/assets/ce970a11-c079-4f64-b308-e61231ca8121)
+---
+### User Service Structure
+![personalized-news-aggregator-user-service](https://github.com/user-attachments/assets/0293f94a-aee5-4bc8-976a-90fd8d4420b6)
+---
+### News Service Structure
+![personalized-news-aggregator-news-service](https://github.com/user-attachments/assets/1523fe39-3ced-4577-a528-d25ddbc624c6)
+
+### Notification Service Structure
+![personalized-news-aggregator-notification-service](https://github.com/user-attachments/assets/f5758f32-85fe-4dc6-9196-1b975ee4ee8f)
 ---
 
 ## Technologies Used
 
 - **Programming Language**: JavaScript (Node.js) 
-- **Frameworks/Libraries**: Express.js  
+- **Frameworks/Libraries**: Express.js, React, axios, bcryptjs, cors, dotenv, mongoose, supertest, vitest, winston, nodemailer 
 - **Database**: MongoDB
-- **Tools**: Docker, Git, Postman
+- **Tools**: Docker, Git, Postman, Dapr
 
 
 ---
