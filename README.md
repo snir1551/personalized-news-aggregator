@@ -33,20 +33,19 @@ This project consists of three microservices: User Service, News Service and Not
 ## System Diagram
 
 ### General Structure
-![personalized-news-aggregator drawio (1)](https://github.com/user-attachments/assets/c4f9c13d-3ff2-48f3-86d8-7f9b609b616b)
+![personalized-news-aggregator-general](https://github.com/user-attachments/assets/2b10c2b4-9678-465f-b158-e642b0da0ec4)
 ---
 ### User-Service Structure
-![personalized-news-aggregator2 drawio](https://github.com/user-attachments/assets/5836261a-1b6f-463b-887a-dad353c29cab)
+![personalized-news-aggregator-user-service](https://github.com/user-attachments/assets/4688aebf-50c1-4f90-b933-9a96ddb4cdff)
 ---
 ### Notification-Service Structure
-![personalized-news-aggregator-notification-service drawio](https://github.com/user-attachments/assets/2adb2e9d-2acb-483c-80a9-0e5af2e306ab)
+![personalized-news-aggregator-notification-service](https://github.com/user-attachments/assets/629b6103-8ee5-4c8c-b618-84aecdaae86a)
 ---
 ### News-Service Structure
-![personalized-news-aggregator-news-service drawio (1)](https://github.com/user-attachments/assets/b96cff25-6db4-4345-8430-dc423de4b416)
+![personalized-news-aggregator-news-service](https://github.com/user-attachments/assets/0f929c53-22e6-43a7-8d08-11efb05212a3)
 ---
 ## Technologies Used
 - **Programming Language**: JavaScript (Node.js) 
-
 - **Frameworks/Libraries**: Express.js, React, axios, bcryptjs, cors, dotenv, mongoose, supertest, vitest, winston, nodemailer, amqplib  
 - **Database**: MongoDB
 - **Tools**: Docker, Git, Postman, Dapr
