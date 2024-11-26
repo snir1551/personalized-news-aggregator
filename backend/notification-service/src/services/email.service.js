@@ -8,7 +8,7 @@ const initTransporter = () => {
     transporter = nodemailer.createTransport(transporterConfig);
 };
 
-export const sendEmailHandler = async (email, newsContent) => {
+export const sendEmailService = async (email, newsContent) => {
     if (!transporter) {
         initTransporter();
     }

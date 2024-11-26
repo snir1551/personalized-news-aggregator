@@ -30,7 +30,7 @@ const getUser = async (req, res) => {
     logger.info(`User found: ${user.username}`);
     res.json(user); 
   } catch (error) {
-    logger.error({ err: error }, `Error retrieving user with ID: ${id}`);
+    logger.error({ err: error }, `Error user with ID: ${userId}`);
     res.status(500).send('Error retrieving user from the database');
   }
 };
