@@ -18,17 +18,6 @@ This project consists of three microservices: User Service, News Service and Not
 
 ---
 
-## System Diagram
-
-### General Structure
-![personalized-news-aggregator-general](https://github.com/user-attachments/assets/ce970a11-c079-4f64-b308-e61231ca8121)
----
-### User Service Structure
-![personalized-news-aggregator-user-service](https://github.com/user-attachments/assets/0293f94a-aee5-4bc8-976a-90fd8d4420b6)
----
-### News Service Structure
-![personalized-news-aggregator-news-service](https://github.com/user-attachments/assets/1523fe39-3ced-4577-a528-d25ddbc624c6)
-
 
 ## System Diagram
 
