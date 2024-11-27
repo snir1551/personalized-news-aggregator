@@ -14,7 +14,7 @@ This project consists of three microservices: User Service, News Service and Not
   - [Prerequisites](#prerequisites)  
   - [Installation](#installation)  
 - [How to Run the Project](#how-to-run-the-project)  
-- [How to Run the Testing](#how-to-run-the-testing)
+- [How to run automated tests](#how-to-run-automated-tests)
 
 ---
 
@@ -97,38 +97,62 @@ Steps to set up the project locally:
     ![image](https://github.com/user-attachments/assets/56240f24-4744-4e1d-b965-e1a6f7cd4deb)
 
 
-## How to run tests on the project
+## How to Run manual Tests
 
-Open your Postman:
+### Open your Postman:
 
-1. Check getAllusers:
+#### Check getAllusers:
    ![image](https://github.com/user-attachments/assets/a26ad19a-7f05-4063-93bd-218d9209f1ee)
+   
    We can see that there are no people registered to the site
-2. Check register:
+
+   ---
+#### Check register:
    ![image](https://github.com/user-attachments/assets/0a5d75f2-7f28-4a47-821f-264200f3de7b)
+   
    A user has been added
-3. Check getAllusers:
+
+   ---
+#### Check getAllusers:
    ![image](https://github.com/user-attachments/assets/48d07be0-8079-49ce-9436-c86833e05472)
+   
    We can see that the user has been added
-4. Check fetchNewsController (use user id):
+
+   ---
+#### Check fetchNewsController (use user id):
    ![image](https://github.com/user-attachments/assets/1b88054e-bb06-4230-9f04-c33b6f05051d)
+   
    We can see that we got the news according to the user's preferences
-5. Check sendNotifications:
+
+   ---
+#### Check sendNotifications:
    ![image](https://github.com/user-attachments/assets/9a854882-2f69-46e0-bd73-2fef01a86da5)
+   
    We can see that the news has been successfully sent to the email and telegram
-7. In the email I got:
+
+   ---
+#### In the email I got:
    ![image](https://github.com/user-attachments/assets/218e5d78-b155-4f1d-9efe-70c4992e2f61)
-8. Check updatePreferences:
+
+   ---
+#### Check updatePreferences:
    ![image](https://github.com/user-attachments/assets/3d361f47-0c56-47f1-a678-ad02a6d3a93b)
+   
    We can see that the user's preferences have been successfully changed
-9. Check fetchNewsController with new user preferences:
+
+   ---
+#### Check fetchNewsController with new user preferences:
    ![image](https://github.com/user-attachments/assets/57368135-57f6-4e7d-b4a5-669aabc2e20f)
-10. Check sendNotifications: with the updated news from new user preferences:
-    ![image](https://github.com/user-attachments/assets/679f6358-ecf1-4a2e-9b76-be78e9825c0b)
-11. In the email I got:
-    ![image](https://github.com/user-attachments/assets/17960307-fb6b-438a-9873-ca169277f1c2)
 
+   ---
+#### Check sendNotifications: with the updated news from new user preferences:
+   ![image](https://github.com/user-attachments/assets/57804637-9c58-4bc0-8549-483d3c9b9bf5)    
 
-    
+   ---
+#### In the email I got:
+   ![image](https://github.com/user-attachments/assets/984c651a-5382-4a92-bbc0-66421847164e)
 
+   ---
+   
+## How to run automated tests
 
