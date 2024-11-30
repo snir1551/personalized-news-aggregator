@@ -107,7 +107,7 @@ Steps to set up the project locally:
 #### Check getAllusers:
    ![image](https://github.com/user-attachments/assets/a26ad19a-7f05-4063-93bd-218d9209f1ee)
    
-   We can see that there are no people registered to the site
+   We can see that there are no people registered to the website
 
    ---
 #### Check register:
