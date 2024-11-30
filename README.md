@@ -2,6 +2,9 @@
 
 This project consists of three microservices: User Service, News Service and Notification Service. Each service is responsible for specific functionality.
 
+User Service: Manages user information and preferences.
+News Service: Fetches and summarizes news articles.
+Notification Service: Sends the summarized news to the user's email or telegram.
 
 ## Table of Contents
 - [System Diagram]()
@@ -156,3 +159,21 @@ Steps to set up the project locally:
    
 ## How to run automated tests
 
+1. Write "cd .\backend\" in your terminal like here:
+   ![image](https://github.com/user-attachments/assets/c201e83e-2150-452d-be6e-149ce220e46b)
+2. Write "cd .\user-service\" in your terminal like here:
+   ![image](https://github.com/user-attachments/assets/3967da93-c2b5-4bac-8994-28be642b745d)
+3. Write "npm test" in your terminal like here:
+   ![image](https://github.com/user-attachments/assets/5b651050-c237-4e7e-a4a9-0d16c2fbbe2a)
+4. Write "cd ../" in your terminal like here:
+   ![image](https://github.com/user-attachments/assets/716c18c4-e496-4cce-b8ad-50d394e21631)
+5. Write "cd .\notification-service\" in your terminal like here:
+   ![image](https://github.com/user-attachments/assets/4c86b12c-213d-4219-b3e0-dcc27b27d051)
+6. Write "npm test" in your terminal like here:
+   ![image](https://github.com/user-attachments/assets/8dfad7db-39bb-4a3f-9505-246e5da121ae)
+7. Write "cd ../" in your terminal like here:
+   ![image](https://github.com/user-attachments/assets/bacfbd22-fe6d-4202-9dba-54d596183f06)
+8. Write "cd .\news-service\" in your terminal like here:
+   ![image](https://github.com/user-attachments/assets/adc86c19-1cfb-489d-866c-a03d837e0ec3)
+9. Write "npm test" in your terminal like here:
+   ![image](https://github.com/user-attachments/assets/fd1c9236-46e4-4a51-867b-cdeb49fe7967)
