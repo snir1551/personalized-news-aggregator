@@ -2,9 +2,9 @@
 
 This project consists of three microservices: User Service, News Service and Notification Service. Each service is responsible for specific functionality.
 
-User Service: Manages user information and preferences.
-News Service: Fetches and summarizes news articles.
-Notification Service: Sends the summarized news to the user's email or telegram.
+- User Service: Manages user information and preferences.
+- News Service: Fetches and summarizes news articles.
+- Notification Service: Sends the summarized news to the user's email or telegram.
 
 ## Table of Contents
 - [System Diagram]()
