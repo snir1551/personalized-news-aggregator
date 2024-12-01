@@ -85,7 +85,7 @@ const updatePreferences = async (req, res) => {
 
       logger.info({ userId }, 'Preferences updated successfully');
       
-      res.json({ message: 'Preferences updated successfully', user });
+      res.json({success: true, message: 'Preferences updated successfully', user });
     } catch (error) {
       logger.error({ userId: req.params.userId, err: error }, 'Error updating preferences');
       res.status(500).json({ error: error.message });

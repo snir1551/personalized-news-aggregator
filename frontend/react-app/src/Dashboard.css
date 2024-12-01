@@ -1,0 +1,103 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+
+.dashboard-container {
+    padding: 20px;
+}
+  
+.dashboard-header {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+  
+.dashboard-subheader {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+  
+
+.users-table-container {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+  
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+.users-table th, .users-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+  
+.users-table th {
+    background-color: #f1f1f1;
+}
+  
+  /* כפתורים */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+  
+button:hover {
+    background-color: #45a049;
+}
+  
+  
+.settings-container {
+    margin-top: 20px;
+}
+  
+.delete-account-button {
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+  
+.delete-account-button:hover {
+    background-color: #e53935;
+}
+  
+
+.preferences-container {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+  
+.preferences-section {
+    margin-bottom: 10px;
+}
+  
+.preferences-section label {
+    margin-right: 10px;
+}
+  
+.news-container {
+    margin-top: 20px;
+}
+  
+.response-container {
+    margin-top: 20px;
+}

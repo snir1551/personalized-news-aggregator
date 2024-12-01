@@ -3,7 +3,7 @@ import { sendNotificationsController } from '../controllers/notification.control
 
 const router = express.Router();
 
-// הגדרת ה־route
+
 router.post('/send', sendNotificationsController);
 
 export default router;

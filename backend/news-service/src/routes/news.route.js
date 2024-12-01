@@ -5,6 +5,6 @@ const router = express.Router();
 
 
 
-router.get('/', fetchNewsController);
+router.get('/:userId', fetchNewsController);
 
 export default router;

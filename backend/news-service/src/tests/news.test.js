@@ -9,7 +9,7 @@ import app from '../index.js';
 const request = supertest(app);
 
 
-describe("User crud operation", () => {
+describe("Fetch news", () => {
 
     describe("GET /api/news", () => {
         it("should fetch news based on user preferences", async () => {
@@ -19,14 +19,14 @@ describe("User crud operation", () => {
                 technology: ["email"]
             }
             const userId = "123"
-            const response = await request.get(`/api/news`).send({preferences: userPreferences});
+            const response = await request.get(`/api/news/${userId}`).send({preferences: userPreferences});
             expect(response.status).toBe(200);
         });
 
         it("should return 400 if preferences are not set", async () => {
             const userPreferences = null
             const userId = "123"
-            const response = await request.get(`/api/news`).send({preferences: userPreferences});
+            const response = await request.get(`/api/news/${userId}`).send({preferences: userPreferences});
             expect(response.status).toBe(400);
         });
 
@@ -37,7 +37,7 @@ describe("User crud operation", () => {
                 technology: ["email"]
             }
             const userId = "123"
-            const response = await request.get(`/api/news`).send({preferences: userPreferences});
+            const response = await request.get(`/api/news/${userId}`).send({preferences: userPreferences});
             expect(response.status).toBe(500);
         });
     });
